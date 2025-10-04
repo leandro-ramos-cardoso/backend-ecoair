@@ -48,5 +48,4 @@ public class DeviceController {
         sensorDataService.saveReading(dto);
         return ResponseEntity.ok("Dados recebidos com sucesso");
     }
-
 }
