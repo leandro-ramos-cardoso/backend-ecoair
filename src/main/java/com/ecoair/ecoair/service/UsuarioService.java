@@ -1,6 +1,6 @@
-package com.ecoair.ecoair.security.service;
+package com.ecoair.ecoair.service;
 
-import com.ecoair.ecoair.security.repository.UsuarioRepository;
+import com.ecoair.ecoair.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

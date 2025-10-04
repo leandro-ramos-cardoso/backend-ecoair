@@ -1,4 +1,4 @@
-package com.ecoair.ecoair.security.dtos;
+package com.ecoair.ecoair.dtos;
 
 public record LoginResponseDTO(
         String token

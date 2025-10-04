@@ -1,12 +1,12 @@
-package com.ecoair.ecoair.security.service;
+package com.ecoair.ecoair.service;
 
 
-import com.ecoair.ecoair.security.dtos.LoginRequestDTO;
-import com.ecoair.ecoair.security.dtos.LoginResponseDTO;
-import com.ecoair.ecoair.security.dtos.RegisterRequestDTO;
-import com.ecoair.ecoair.security.dtos.UsuarioResponseDTO;
-import com.ecoair.ecoair.security.model.Usuario;
-import com.ecoair.ecoair.security.repository.UsuarioRepository;
+import com.ecoair.ecoair.dtos.LoginRequestDTO;
+import com.ecoair.ecoair.dtos.LoginResponseDTO;
+import com.ecoair.ecoair.dtos.RegisterRequestDTO;
+import com.ecoair.ecoair.dtos.UsuarioResponseDTO;
+import com.ecoair.ecoair.model.Usuario;
+import com.ecoair.ecoair.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;

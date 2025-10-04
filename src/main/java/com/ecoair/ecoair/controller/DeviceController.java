@@ -9,6 +9,7 @@ import com.ecoair.ecoair.service.SensorDataService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class DeviceController {
     private final SensorDataService sensorDataService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<DeviceResponseDTO> createDevice(@Valid @RequestBody DeviceRequestDTO deviceRequestDTO) {
         DeviceResponseDTO deviceCreated = deviceService.createDevice(deviceRequestDTO);
 
@@ -39,6 +41,7 @@ public class DeviceController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<DeviceResponseDTO> updateDeviceById(@PathVariable Long id, @Valid @RequestBody DeviceRequestDTO deviceRequestDTO) {
         return ResponseEntity.ok(deviceService.updateDeviceById(id, deviceRequestDTO));
     }
@@ -47,5 +50,10 @@ public class DeviceController {
     public ResponseEntity<String> receiveSensorData(@Valid @RequestBody SensorDataRequestDTO dto) {
         sensorDataService.saveReading(dto);
         return ResponseEntity.ok("Dados recebidos com sucesso");
+    }
+
+    @GetMapping("/publico")
+    public ResponseEntity<String> publico() {
+        return ResponseEntity.ok("Endpoint público (sem segurança)");
     }
 }
