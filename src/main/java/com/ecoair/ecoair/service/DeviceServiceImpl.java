@@ -23,20 +23,20 @@ public class DeviceServiceImpl implements DeviceService {
     public DeviceResponseDTO createDevice(DeviceRequestDTO dto) {
         String mac = dto.mac().toUpperCase();
 
-        Device existingDevice = deviceRepository.findByMac(mac)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.FORBIDDEN,
-                        "O dispositivo com o MAC " + mac + " não está autorizado a enviar dados."
-                ));
+        if (deviceRepository.findByMac(mac).isPresent()) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Já existe um dispositivo cadastrado com o MAC " + mac
+            );
+        }
 
-        existingDevice.setDeviceName(dto.deviceName());
-        existingDevice.setLatitude(dto.latitude());
-        existingDevice.setLongitude(dto.longitude());
-        existingDevice.setGasType(dto.gasType());
+        Device device = deviceMapper.toEntity(dto);
+        device.setMac(mac);
 
-        Device saved = deviceRepository.save(existingDevice);
+        Device saved = deviceRepository.save(device);
         return deviceMapper.toDTO(saved);
     }
+
 
 
     @Override
