@@ -14,7 +14,7 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("🌍 EcoAir API")
-                        .description("API de monitoramento da qualidade do ar (MQ-7 / MQ-9 + ESP32)")
+                        .description("API de monitoramento da qualidade do ar (MQ9 + ESP32)")
                         .version("1.0.0")
                         .license(new License().name("Apache 2.0").url("https://springdoc.org")));
     }

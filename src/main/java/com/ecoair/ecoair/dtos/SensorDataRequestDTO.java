@@ -23,20 +23,7 @@ public record SensorDataRequestDTO(
         Double sensorValue,
 
         @NotBlank(message = "Tipo de gás é obrigatório")
-        String gasType,
-
-        @NotNull(message = "Latitude é obrigatória")
-        @DecimalMin(value = "-90.0", message = "Latitude deve estar entre -90 e 90")
-        @DecimalMax(value = "90.0", message = "Latitude deve estar entre -90 e 90")
-        Double latitude,
-
-        @NotNull(message = "Longitude é obrigatória")
-        @DecimalMin(value = "-180.0", message = "Longitude deve estar entre -180 e 180")
-        @DecimalMax(value = "180.0", message = "Longitude deve estar entre -180 e 180")
-        Double longitude,
-
-        @NotNull(message = "Timestamp é obrigatório")
-        LocalDateTime timestamp
+        String gasType
 
 ) {
 }
