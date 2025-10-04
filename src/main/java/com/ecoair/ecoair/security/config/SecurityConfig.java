@@ -1,6 +1,5 @@
 package com.ecoair.ecoair.security.config;
 
-import com.ecoair.ecoair.security.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +26,6 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
-    private final UsuarioService usuarioService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,9 +33,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                        .requestMatchers("/auth/login", "/auth/register").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -59,9 +56,10 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("http://localhost:5173", "https://front-gerenciador-turma-03-five.vercel.app"));
+        config.setAllowedOrigins(List.of("http://localhost:5173", "http://127.0.0.1:5173", "https://front-gerenciador-turma-03-five.vercel.app"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setMaxAge(3600L); // Cache preflight por 1 hora
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
