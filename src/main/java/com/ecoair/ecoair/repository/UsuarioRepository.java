@@ -1,6 +1,6 @@
-package com.ecoair.ecoair.security.repository;
+package com.ecoair.ecoair.repository;
 
-import com.ecoair.ecoair.security.model.Usuario;
+import com.ecoair.ecoair.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

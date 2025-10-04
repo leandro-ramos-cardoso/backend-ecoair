@@ -1,6 +1,6 @@
-package com.ecoair.ecoair.security.dtos;
+package com.ecoair.ecoair.dtos;
 
-import com.ecoair.ecoair.security.enums.Role;
+import com.ecoair.ecoair.enums.Role;
 
 public record RegisterRequestDTO(
         String username,

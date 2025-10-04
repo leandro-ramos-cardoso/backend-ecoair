@@ -1,6 +1,6 @@
-package com.ecoair.ecoair.security.config;
+package com.ecoair.ecoair.config;
 
-import com.ecoair.ecoair.security.service.JwtService;
+import com.ecoair.ecoair.service.JwtService;
 import io.micrometer.common.lang.NonNullApi;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -39,7 +39,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || path.startsWith("/auth/register")
                 || path.startsWith("/v3/api-docs")
                 || path.startsWith("/swagger-ui")
-                || path.equals("/swagger-ui.html")) {
+                || path.equals("/swagger-ui.html")
+                || path.startsWith("/device")) {
             log.debug("Caminho público liberado: {}", path);
             filterChain.doFilter(request, response);
             return;

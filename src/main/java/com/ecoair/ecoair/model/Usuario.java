@@ -1,6 +1,6 @@
-package com.ecoair.ecoair.security.model;
+package com.ecoair.ecoair.model;
 
-import com.ecoair.ecoair.security.enums.Role;
+import com.ecoair.ecoair.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.ecoair.ecoair.security.service;
+package com.ecoair.ecoair.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

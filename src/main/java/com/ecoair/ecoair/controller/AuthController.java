@@ -1,11 +1,11 @@
-package com.ecoair.ecoair.security.controller;
+package com.ecoair.ecoair.controller;
 
 
-import com.ecoair.ecoair.security.dtos.LoginRequestDTO;
-import com.ecoair.ecoair.security.dtos.LoginResponseDTO;
-import com.ecoair.ecoair.security.dtos.RegisterRequestDTO;
-import com.ecoair.ecoair.security.dtos.UsuarioResponseDTO;
-import com.ecoair.ecoair.security.service.AuthService;
+import com.ecoair.ecoair.dtos.LoginRequestDTO;
+import com.ecoair.ecoair.dtos.LoginResponseDTO;
+import com.ecoair.ecoair.dtos.RegisterRequestDTO;
+import com.ecoair.ecoair.dtos.UsuarioResponseDTO;
+import com.ecoair.ecoair.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;

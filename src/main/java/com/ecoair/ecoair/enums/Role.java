@@ -1,4 +1,4 @@
-package com.ecoair.ecoair.security.enums;
+package com.ecoair.ecoair.enums;
 
 public enum Role {
     ADMIN,
