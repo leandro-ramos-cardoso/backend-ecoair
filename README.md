@@ -84,25 +84,7 @@ git clone <url-do-repositorio>
 cd EcoAir
 ```
 
-### 2. Configure o banco de dados
-
-Edite o arquivo `src/main/resources/application.properties`:
-
-```properties
-# H2 Database (para desenvolvimento)
-spring.datasource.url=jdbc:h2:mem:ecoair
-spring.datasource.driverClassName=org.h2.Driver
-spring.datasource.username=sa
-spring.datasource.password=
-spring.h2.console.enabled=true
-
-# JPA/Hibernate
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-spring.jpa.hibernate.ddl-auto=create-drop
-spring.jpa.show-sql=true
-```
-
-### 3. Execute o projeto
+### 2. Execute o projeto
 
 ```bash
 # Compilar e executar
@@ -112,7 +94,7 @@ spring.jpa.show-sql=true
 mvn spring-boot:run
 ```
 
-### 4. Acesse a aplicação
+### 3. Acesse a aplicação
 
 - **API**: http://localhost:8080
 - **H2 Console**: http://localhost:8080/h2-console
