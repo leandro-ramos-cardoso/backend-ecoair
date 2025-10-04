@@ -1,0 +1,21 @@
+package com.ecoair.ecoair.config;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class OpenApiConfig {
+
+    @Bean
+    public OpenAPI ecoAirOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("🌍 EcoAir API")
+                        .description("API de monitoramento da qualidade do ar (MQ-7 / MQ-9 + ESP32)")
+                        .version("1.0.0")
+                        .license(new License().name("Apache 2.0").url("https://springdoc.org")));
+    }
+}
