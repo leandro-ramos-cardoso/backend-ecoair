@@ -23,6 +23,9 @@ public record DeviceRequestDTO(
         Double longitude,
 
         @NotBlank(message = "Tipo de gás é obrigatório")
-        String gasType
+        String gasType,
+
+        @NotBlank(message = "Status do dispositivo é obrigatório")
+        String deviceStatus
 ) {
 }

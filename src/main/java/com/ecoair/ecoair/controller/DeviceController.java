@@ -48,7 +48,7 @@ public class DeviceController {
 
     @PostMapping("/data")
     public ResponseEntity<String> receiveSensorData(@Valid @RequestBody SensorDataRequestDTO dto) {
-        sensorDataService.saveReading(dto);
+        sensorDataService.createSensorData(dto);
         return ResponseEntity.ok("Dados recebidos com sucesso");
     }
 

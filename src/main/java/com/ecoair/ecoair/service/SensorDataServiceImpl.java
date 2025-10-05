@@ -2,14 +2,19 @@ package com.ecoair.ecoair.service;
 
 import com.ecoair.ecoair.dtos.SensorDataRequestDTO;
 import com.ecoair.ecoair.dtos.SensorDataResponseDTO;
+import com.ecoair.ecoair.enums.AirQualityLevel;
 import com.ecoair.ecoair.mapper.SensorDataMapper;
 import com.ecoair.ecoair.model.SensorData;
+import com.ecoair.ecoair.repository.DeviceRepository;
 import com.ecoair.ecoair.repository.SensorDataRepository;
+import com.ecoair.ecoair.utils.AirQualityEvaluator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,17 +25,25 @@ public class SensorDataServiceImpl implements SensorDataService {
     private final SensorDataRepository sensorDataRepository;
     private final SensorDataMapper sensorDataMapper;
 
+    @Autowired
+    private final DeviceRepository deviceRepository;
+
     @Override
     public SensorDataResponseDTO createSensorData(SensorDataRequestDTO dto) {
         SensorData sensorData = sensorDataMapper.toEntity(dto);
         SensorData saved = sensorDataRepository.save(sensorData);
-        return sensorDataMapper.toDTO(saved);
-    }
 
-    @Override
-    public void saveReading(SensorDataRequestDTO dto) {
-        SensorData sensorData = sensorDataMapper.toEntity(dto);
-        sensorDataRepository.save(sensorData);
+        if ("CO".equalsIgnoreCase(dto.gasType())) {
+            BigDecimal coValue = BigDecimal.valueOf(dto.sensorValue());
+            AirQualityLevel nivel = AirQualityEvaluator.classify(coValue);
+
+            deviceRepository.findByMac(dto.mac()).ifPresent(device -> {
+                device.setDeviceStatus(nivel.name()); // "BOA" | "MEDIA" | "RUIM"
+                deviceRepository.save(device);
+            });
+        }
+
+        return sensorDataMapper.toDTO(saved);
     }
 
     @Override

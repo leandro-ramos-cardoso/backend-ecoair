@@ -35,6 +35,9 @@ public class Device {
     @Column(name = "gas_type", nullable = false, length = 50)
     private String gasType;
 
+    @Column(name = "device_status", nullable = false, length = 20)
+    private String deviceStatus;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

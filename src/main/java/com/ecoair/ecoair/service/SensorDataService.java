@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SensorDataService {
     SensorDataResponseDTO createSensorData(SensorDataRequestDTO sensorDataRequestDTO);
-    void saveReading(SensorDataRequestDTO sensorDataRequestDTO);
+    //void saveReading(SensorDataRequestDTO sensorDataRequestDTO);
     List<SensorDataResponseDTO> listSensorData();
     SensorDataResponseDTO findSensorDataById(Long id);
     List<SensorDataResponseDTO> findSensorDataByMac(String mac);

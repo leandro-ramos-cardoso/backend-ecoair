@@ -26,7 +26,7 @@ public class SensorDataController {
 
     @PostMapping("/save")
     public ResponseEntity<Void> saveReading(@Valid @RequestBody SensorDataRequestDTO dto) {
-        sensorDataService.saveReading(dto);
+        sensorDataService.createSensorData(dto);
         return ResponseEntity.noContent().build();
     }
 

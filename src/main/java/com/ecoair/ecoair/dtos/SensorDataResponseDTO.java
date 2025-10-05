@@ -6,6 +6,8 @@ public record SensorDataResponseDTO(
         Long id,
         String mac,
         Double sensorValue,
-        String gasType
+        String gasType,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) {
 }
