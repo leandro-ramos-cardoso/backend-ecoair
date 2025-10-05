@@ -1,8 +1,10 @@
 package com.ecoair.ecoair.service;
 
+import com.ecoair.ecoair.dtos.DeviceResponseDTO;
 import com.ecoair.ecoair.dtos.SensorDataRequestDTO;
 import com.ecoair.ecoair.dtos.SensorDataResponseDTO;
 import com.ecoair.ecoair.mapper.SensorDataMapper;
+import com.ecoair.ecoair.model.Device;
 import com.ecoair.ecoair.model.SensorData;
 import com.ecoair.ecoair.repository.SensorDataRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -69,10 +72,12 @@ public class SensorDataServiceImpl implements SensorDataService {
     }
 
     @Override
-    public List<SensorDataResponseDTO> findLatestSensorDataByMac(String mac) {
-        return sensorDataRepository.findLatestByMac(mac).stream()
-                .map(sensorDataMapper::toDTO)
-                .toList();
+    public SensorDataResponseDTO findLatestSensorDataByMac(String mac) {
+        SensorData sensorData = sensorDataRepository.findLatestByMac(mac)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        return sensorDataMapper.toDTO(sensorData);
+
     }
 
     @Override

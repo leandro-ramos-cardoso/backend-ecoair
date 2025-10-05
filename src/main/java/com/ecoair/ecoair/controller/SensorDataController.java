@@ -64,9 +64,7 @@ public class SensorDataController {
     }
 
     @GetMapping("/{mac}/latest")
-    public ResponseEntity<List<SensorDataResponseDTO>> getLatestByMac(
-            @PathVariable String mac
-    ) {
+    public ResponseEntity<SensorDataResponseDTO> getLatestByMac(@PathVariable String mac) {
         var result = sensorDataService.findLatestSensorDataByMac(mac);
         return ResponseEntity.ok(result);
     }
