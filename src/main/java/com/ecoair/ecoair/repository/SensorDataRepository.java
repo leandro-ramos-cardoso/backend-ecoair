@@ -20,7 +20,7 @@ public interface SensorDataRepository extends JpaRepository<SensorData, Long> {
     List<SensorData> findByGasType(String gasType);
 
     @Query("SELECT s FROM SensorData s WHERE s.mac = :mac ORDER BY s.timestamp DESC")
-    Optional<SensorData> findLatestByMac(@Param("mac") String mac);
+    List<SensorData> findLatestByMac(@Param("mac") String mac);
 
     @Query("SELECT s FROM SensorData s WHERE s.timestamp >= :startTime AND s.timestamp <= :endTime ORDER BY s.timestamp DESC")
     List<SensorData> findByTimestampRange(@Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);

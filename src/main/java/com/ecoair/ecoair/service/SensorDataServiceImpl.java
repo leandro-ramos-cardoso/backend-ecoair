@@ -72,11 +72,14 @@ public class SensorDataServiceImpl implements SensorDataService {
     }
 
     @Override
-    public SensorDataResponseDTO findLatestSensorDataByMac(String mac) {
-        SensorData sensorData = sensorDataRepository.findLatestByMac(mac)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        return sensorDataMapper.toDTO(sensorData);
+    public Optional<SensorDataResponseDTO> findLatestSensorDataByMac(String mac) {
+        return sensorDataRepository.findLatestByMac(mac).stream()
+                .findFirst()
+                .map(sensorDataMapper::toDTO);
+//        SensorData sensorData = sensorDataRepository.findLatestByMac(mac)
+//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+//
+//        return sensorDataMapper.toDTO(sensorData);
 
     }
 

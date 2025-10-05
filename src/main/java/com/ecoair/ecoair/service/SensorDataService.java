@@ -5,6 +5,7 @@ import com.ecoair.ecoair.dtos.SensorDataResponseDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface SensorDataService {
     SensorDataResponseDTO createSensorData(SensorDataRequestDTO sensorDataRequestDTO);
@@ -14,6 +15,6 @@ public interface SensorDataService {
     List<SensorDataResponseDTO> findSensorDataByMac(String mac);
     List<SensorDataResponseDTO> findSensorDataByMacAndTimeRange(String mac, LocalDateTime startTime, LocalDateTime endTime);
     List<SensorDataResponseDTO> findSensorDataByGasType(String gasType);
-    SensorDataResponseDTO findLatestSensorDataByMac(String mac);
+    Optional<SensorDataResponseDTO> findLatestSensorDataByMac(String mac);
     List<SensorDataResponseDTO> findSensorDataByMacAndGasType(String mac, String gasType);
 }
