@@ -10,6 +10,8 @@ public record DeviceResponseDTO(
         Double longitude,
         String gasType,
         LocalDateTime createdAt,
-        LocalDateTime updatedAt
+        LocalDateTime updatedAt,
+        String deviceStatus,
+        Boolean demo
 ) {
 }
