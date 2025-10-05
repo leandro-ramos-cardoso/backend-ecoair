@@ -82,11 +82,27 @@ public class SensorDataServiceImpl implements SensorDataService {
     }
 
     @Override
-    public List<SensorDataResponseDTO> findLatestSensorDataByMac(String mac) {
-        return sensorDataRepository.findLatestByMac(mac).stream()
-                .map(sensorDataMapper::toDTO)
-                .toList();
+    public SensorDataResponseDTO findLatestSensorDataByMac(String mac) {
+        var data = sensorDataRepository.findTopByMacOrderByIdDesc(mac)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Nenhum dado encontrado para o dispositivo: " + mac
+                ));
+
+        return new SensorDataResponseDTO(
+                data.getId(),
+                data.getMac(),
+                data.getSensorValue(),
+                data.getGasType(),
+                data.getTimestamp(), // usado como createdAt
+                data.getTimestamp()  // usado como updatedAt
+        );
     }
+
+
+
+
+
 
     @Override
     public List<SensorDataResponseDTO> findSensorDataByMacAndGasType(String mac, String gasType) {

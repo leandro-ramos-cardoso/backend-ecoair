@@ -19,6 +19,9 @@ public interface SensorDataRepository extends JpaRepository<SensorData, Long> {
 
     List<SensorData> findByGasType(String gasType);
 
+    // ✅ Busca o último registro (pelo ID ou timestamp, se existir)
+    Optional<SensorData> findTopByMacOrderByIdDesc(String mac);
+
     @Query("SELECT s FROM SensorData s WHERE s.mac = :mac ORDER BY s.timestamp DESC")
     List<SensorData> findLatestByMac(@Param("mac") String mac);
 

@@ -3,6 +3,7 @@ package com.ecoair.ecoair.controller;
 import com.ecoair.ecoair.dtos.DeviceRequestDTO;
 import com.ecoair.ecoair.dtos.DeviceResponseDTO;
 import com.ecoair.ecoair.dtos.SensorDataRequestDTO;
+import com.ecoair.ecoair.dtos.SensorDataResponseDTO;
 import com.ecoair.ecoair.mapper.DeviceMapper;
 import com.ecoair.ecoair.service.DeviceService;
 import com.ecoair.ecoair.service.SensorDataService;
@@ -56,4 +57,11 @@ public class DeviceController {
     public ResponseEntity<String> publico() {
         return ResponseEntity.ok("Endpoint público (sem segurança)");
     }
+
+    @GetMapping("/{mac}/latest")
+    public ResponseEntity<SensorDataResponseDTO> getLatestByMac(@PathVariable String mac) {
+        var result = sensorDataService.findLatestSensorDataByMac(mac);
+        return ResponseEntity.ok(result);
+    }
+
 }

@@ -14,6 +14,6 @@ public interface SensorDataService {
     List<SensorDataResponseDTO> findSensorDataByMac(String mac);
     List<SensorDataResponseDTO> findSensorDataByMacAndTimeRange(String mac, LocalDateTime startTime, LocalDateTime endTime);
     List<SensorDataResponseDTO> findSensorDataByGasType(String gasType);
-    List<SensorDataResponseDTO> findLatestSensorDataByMac(String mac);
+    SensorDataResponseDTO findLatestSensorDataByMac(String mac);
     List<SensorDataResponseDTO> findSensorDataByMacAndGasType(String mac, String gasType);
 }

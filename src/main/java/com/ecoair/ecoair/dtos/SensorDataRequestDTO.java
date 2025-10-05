@@ -24,6 +24,5 @@ public record SensorDataRequestDTO(
 
         @NotBlank(message = "Tipo de gás é obrigatório")
         String gasType
-
 ) {
 }
