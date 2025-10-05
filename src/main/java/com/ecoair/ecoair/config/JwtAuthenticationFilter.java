@@ -32,21 +32,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        String path = request.getServletPath();
+        final String path = request.getServletPath();
 
-        // Ignora caminhos públicos (login, registro, Swagger)
-        if (path.startsWith("/auth/login")
-                || path.startsWith("/auth/register")
-                || path.startsWith("/v3/api-docs")
-                || path.startsWith("/swagger-ui")
-                || path.equals("/swagger-ui.html")
-                || path.startsWith("/device")) {
-            log.debug("Caminho público liberado: {}", path);
+        if (path.startsWith("/auth/login") || path.startsWith("/auth/register")) {
             filterChain.doFilter(request, response);
             return;
         }
 
         final String authHeader = request.getHeader("Authorization");
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             log.trace("Nenhum token JWT presente no header Authorization.");
             filterChain.doFilter(request, response);
