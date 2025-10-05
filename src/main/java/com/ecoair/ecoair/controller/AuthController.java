@@ -33,7 +33,8 @@ public class AuthController {
     public ResponseEntity<UsuarioResponseDTO> getMe() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication == null || !authentication.isAuthenticated()) {
+        if (authentication == null || !authentication.isAuthenticated() ||
+                authentication.getPrincipal().equals("anonymousUser")) {
             return ResponseEntity.status(401).build();
         }
 
@@ -43,6 +44,7 @@ public class AuthController {
             return ResponseEntity.ok(authService.getUsuarioLogado(userDetails.getUsername()));
         }
 
-        return ResponseEntity.status(401).build();
+        return ResponseEntity.ok(authService.getUsuarioLogado(authentication.getName()));
     }
+
 }
