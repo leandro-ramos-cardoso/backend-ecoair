@@ -99,11 +99,6 @@ public class SensorDataServiceImpl implements SensorDataService {
         );
     }
 
-
-
-
-
-
     @Override
     public List<SensorDataResponseDTO> findSensorDataByMacAndGasType(String mac, String gasType) {
         return sensorDataRepository.findByMacAndGasType(mac, gasType).stream()
